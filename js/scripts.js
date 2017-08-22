@@ -1,19 +1,28 @@
 //Business Logic
 function Ticket(age, title, time){
+  this.rating = age;
   this.title = title;
   this.time = time;
-  this.rating = age;
   this.price = 15;
 }
 
-Ticket.prototype.translation = function(time){
-  if (time === 1){
-    return "Afternoon Matinee"
-  }else if (time === 2){
-    return "Evening Show"
-  }else {
-    return "Late Night Showing"
+Ticket.prototype.translationValue = function(time){
+  switch(time){
+    case 1:
+    return "Afternoon Matinee";
+    case 2:
+    return "Evening Show";
+    case 3:
+    return "Late Night Showing";
+    // no default really required
   }
+  // if (time === 1){
+  //   return "Afternoon Matinee"
+  // }else if (time === 2){
+  //   return "Evening Show"
+  // }else {
+  //   return "Late Night Showing"
+  // }
 }
 
 Ticket.prototype.calculation = function(age, time, price) {
@@ -28,7 +37,13 @@ Ticket.prototype.calculation = function(age, time, price) {
     price -= 2;
   }else {
     price;
-  }return ticketCost += price;
+  }return `$${ticketCost += price}`;
+}
+
+function appendToTicket(listId, listItems){
+  listItems.forEach(function(item){
+    $(listId).append(`<li>${item}</li>`);
+  });
 }
 
 function resetFields() {
@@ -42,7 +57,7 @@ $(document).ready(function(){
     event.preventDefault();
 
     $("#ticketInput").hide();
-    $(".panel").show();
+    $(".panel, .return").show();
 
     var nameInput = $("input#name").val();
     var ageInput = parseInt($("input#age").val());
@@ -54,16 +69,20 @@ $(document).ready(function(){
     var cost = newTicket.calculation(ageInput, timeInput, newTicket.price);
     newTicket.price = cost;
 
-    var showing = newTicket.translation(timeInput);
+    var showing = newTicket.translationValue(timeInput);
 
     $(".name").text(nameInput);
-    $("#ticket").append(`<li>${titleInput}</li>`);
-    $("#ticket").append(`<li>${showing}</li>`);
-    $("#ticket").append(`<li>$${cost}</li>`);
+    var ticketItems = [titleInput, showing, cost];
+    appendToTicket("#ticket", ticketItems);
+
+    // $("#ticket").append(`<li>${titleInput}</li>`);
+    // $("#ticket").append(`<li>${showing}</li>`);
+    // $("#ticket").append(`<li>$${cost}</li>`);
 
     $(".return").click(function(){
       $("#ticketInput").show();
-      $(".panel").hide();
+      $(".panel, .return").hide();
+      $("ul").empty();
     });
 
     resetFields();

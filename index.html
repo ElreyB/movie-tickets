@@ -11,7 +11,9 @@
   </head>
   <body>
     <div class="container">
-      <h1>Epic Ticket Kiosk</h1>
+      <div class="kioskHeader">
+        <h1>Epic Ticket Kiosk</h1>
+      </div>
       <form id="ticketInput">
         <div class="form-group">
           <label for="name">Your name:</label>
@@ -27,14 +29,13 @@
           <option>Inception</option>
           <option>Steel Magnolias</option>
         </select>
-        <br>
         <h2>Movie Times</h2>
         <select class="form-group" id="movie-times">
           <option value="1">Afternoon Matinee</option>
-          <option value="0">Evening</option>
-          <option value="0">Late Night</option>
+          <option value="2">Evening</option>
+          <option value="3">Late Night</option>
         </select>
-        <br><br>
+        <br>
         <button type="submit" name="button">Submit!</button>
       </form>
       <br>
@@ -45,9 +46,9 @@
           <ul id="ticket">
 
           </ul>
-          <button class="btn return">Return to Kiosk</button>
         </div>
       </div>
+      <button class="btn return">Return to Kiosk</button>
     </div>
   </body>
 </html>

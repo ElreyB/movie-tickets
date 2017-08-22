@@ -1,10 +1,37 @@
 .panel {
   display: none;
+  font-size: 20px;
 }
-/*#ticketInput {
-  background-image: url("../img/background1.jpg");
-  background-image: cover;
-  background-position: center;
+
+.return {
+  display: none;
+}
+
+body {
+  background-image: url("../img/background.jpg");
   background-repeat: no-repeat;
+  background-position: center;
   background-attachment: fixed;
-}*/
+  background-size: cover;
+}
+
+form{
+  height: 300px;
+  width: 300px;
+  text-align: center;
+  margin-left: 414px;
+}
+
+.kioskHeader {
+  text-align: center;
+  margin-top: 150px;
+}
+
+li {
+  text-decoration: none;
+}
+
+img {
+  width: 30px;
+  height: 30px;
+}
