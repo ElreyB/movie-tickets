@@ -5,6 +5,7 @@ function Ticket(age, title, time){
   this.rating = age;
   this.price = 15;
 }
+
 Ticket.prototype.translation = function(time){
   if (time === 1){
     return "Afternoon Matinee"
@@ -14,6 +15,7 @@ Ticket.prototype.translation = function(time){
     return "Late Night Showing"
   }
 }
+
 Ticket.prototype.calculation = function(age, time, price) {
   var ticketCost = 0;
   if (age <= 17){
@@ -28,6 +30,7 @@ Ticket.prototype.calculation = function(age, time, price) {
     price;
   }return ticketCost += price;
 }
+
 function resetFields() {
   $("input#name").val("");
   $("input#age").val("")
@@ -36,20 +39,33 @@ function resetFields() {
 //User Interface Logic
 $(document).ready(function(){
   $("#ticketInput").submit(function(event){
+    event.preventDefault();
+
     $("#ticketInput").hide();
-    $("#panel").show();
+    $(".panel").show();
+
     var nameInput = $("input#name").val();
     var ageInput = parseInt($("input#age").val());
     var titleInput = $("#movie-title").val();
     var timeInput = parseInt($("#movie-times").val());
+
     var newTicket = new Ticket(ageInput, titleInput, timeInput);
+
     var cost = newTicket.calculation(ageInput, timeInput, newTicket.price);
     newTicket.price = cost;
+
     var showing = newTicket.translation(timeInput);
+
     $(".name").text(nameInput);
     $("#ticket").append(`<li>${titleInput}</li>`);
     $("#ticket").append(`<li>${showing}</li>`);
     $("#ticket").append(`<li>$${cost}</li>`);
-    event.preventDefault();
+
+    $(".return").click(function(){
+      $("#ticketInput").show();
+      $(".panel").hide();
+    });
+
+    resetFields();
   });
 });
